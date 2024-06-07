@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
+    public float speed; // Add a variable to store speed
     public static PlayerStats playerStats;
     public GameObject player;
     public float health;
@@ -43,6 +44,11 @@ public class PlayerStats : MonoBehaviour
         health -= damage;
         CheckDeath();
         SetHealthUI();
+    }
+    public void IncreaseSpeed(float speedBoost)
+    {
+        speed += speedBoost;
+        // Implement any additional logic needed when speed is increased
     }
 
     public void HealCharacter(float heal)

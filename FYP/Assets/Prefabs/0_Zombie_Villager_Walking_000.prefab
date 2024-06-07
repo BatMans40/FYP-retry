@@ -91,7 +91,8 @@ GameObject:
   - component: {fileID: 7167588250908653938}
   - component: {fileID: 957679755585062370}
   - component: {fileID: -4248550439063034654}
-  m_Layer: 0
+  - component: {fileID: 7256261859534690711}
+  m_Layer: 7
   m_Name: 0_Zombie_Villager_Walking_000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03884ab2fb25f4f4b89963d275908a89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 100
   maxHealth: 100
   healthBar: {fileID: 8089230511311323535}
   healthBarSlider: {fileID: 3342675188718391684}
@@ -301,6 +302,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.3
+--- !u!114 &7256261859534690711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4746677773853797141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa8f63e85bba0c46be7d9e34956382f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
 --- !u!1 &5368928997060131062
 GameObject:
   m_ObjectHideFlags: 0
