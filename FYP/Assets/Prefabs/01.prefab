@@ -519,16 +519,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f070d2e6dc88884ea73f335004a1c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1331233541120365023, guid: 7f908ef75119e5b458733450e6f8900b, type: 3}
+  projectilePrefab: {fileID: 4301167722713633036, guid: 5cc9d93a89f8f334387140a8827316c6, type: 3}
   minDamage: 80
   maxDamage: 100
   projectileForce: 3
   cooldown: 2
-  homingRate: 100
   shootingRange: 100
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  rotateSpeed: 200
+  homingStrength: 0.5
 --- !u!1 &4114289073650348323
 GameObject:
   m_ObjectHideFlags: 0
