@@ -2,86 +2,106 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class missilethrow : MonoBehaviour
+public class MissileThrow : MonoBehaviour
 {
     public GameObject projectilePrefab;
     public float minDamage;
     public float maxDamage;
-    public float projectileForce;
+    public float projectileForce = 5f;
     public float cooldown;
-    public float homingRate = 5f;
-    public float shootingRange = 10f; // Range within which the enemy can shoot at other enemies
-    public LayerMask enemyLayer; // Layer to detect enemies
+    public float shootingRange = 10f;
+    public LayerMask enemyLayer;
+    public float rotateSpeed = 200f;
+    public float homingStrength = 0.5f; // Decreased homing strength
 
-    private float lastShotTime; // Time when the last shot was fired
+    private float lastShotTime;
 
     private void Update()
     {
         if (Time.time > lastShotTime + cooldown)
         {
-            // Find all enemies within shooting range
             Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, shootingRange, enemyLayer);
-            foreach (var enemy in enemiesInRange)
+            if (enemiesInRange.Length > 0)
             {
-                // Make sure not to target self
-                if (enemy.gameObject != gameObject)
+                // Find the nearest enemy
+                Collider2D nearestEnemy = enemiesInRange[0];
+                float nearestDistance = Vector2.Distance(transform.position, nearestEnemy.transform.position);
+                for (int i = 1; i < enemiesInRange.Length; i++)
                 {
-                    lastShotTime = Time.time;
-                    ShootAtEnemy(enemy.transform);
-                    break; // Shoot at the first enemy found within range
+                    float distance = Vector2.Distance(transform.position, enemiesInRange[i].transform.position);
+                    if (distance < nearestDistance)
+                    {
+                        nearestEnemy = enemiesInRange[i];
+                        nearestDistance = distance;
+                    }
                 }
+
+                lastShotTime = Time.time;
+                ShootAtEnemy(nearestEnemy.transform);
             }
         }
     }
 
     private void ShootAtEnemy(Transform target)
     {
-        // Instantiate the projectile prefab at the current position
-        GameObject spell = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-
-        // Set damage value
-        TestEnemyProjectile projectileScript = spell.GetComponent<TestEnemyProjectile>();
+        GameObject missile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        TestEnemyProjectile projectileScript = missile.GetComponent<TestEnemyProjectile>();
         if (projectileScript != null)
         {
             projectileScript.damage = Random.Range(minDamage, maxDamage);
         }
 
-        // Start the homing behavior
-        StartCoroutine(HomingProjectile(spell, target));
+        HomingMissile homingMissile = missile.AddComponent<HomingMissile>();
+        homingMissile.Initialize(target, projectileForce, rotateSpeed, homingStrength);
+    }
+}
 
-        // Destroy the projectile after a certain time (you can adjust this duration)
-        Destroy(spell, 3f);
+[RequireComponent(typeof(Rigidbody2D))]
+public class HomingMissile : MonoBehaviour
+{
+    private Transform target;
+    private float speed;
+    private float rotateSpeed;
+    private float homingStrength;
+    private Rigidbody2D rb;
+
+    public void Initialize(Transform target, float speed, float rotateSpeed, float homingStrength)
+    {
+        this.target = target;
+        this.speed = speed;
+        this.rotateSpeed = rotateSpeed;
+        this.homingStrength = homingStrength;
     }
 
-    private IEnumerator HomingProjectile(GameObject projectile, Transform target)
+    private void Start()
     {
-        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-        float waveFrequency = 5f; // Frequency of the wave movement
-        float waveMagnitude = 1f; // Magnitude of the wave movement
-        Vector2 startPosition = projectile.transform.position;
-        float time = 0f;
+        rb = GetComponent<Rigidbody2D>();
+    }
 
-        while (projectile != null && target != null)
+    private void FixedUpdate()
+    {
+        if (target == null)
         {
-            // Calculate the linear direction towards the target
-            Vector2 direction = (target.position - projectile.transform.position).normalized;
-            Vector2 targetVelocity = direction * projectileForce;
+            Destroy(gameObject);
+            return;
+        }
 
-            // Calculate the wave movement
-            float wave = Mathf.Sin(time * waveFrequency) * waveMagnitude;
-            Vector2 waveMovement = new Vector2(wave, 0f);
+        Vector2 direction = (Vector2)target.position - rb.position;
+        direction.Normalize();
 
-            // Combine linear and wave movements
-            rb.velocity = targetVelocity + waveMovement;
+        float rotateAmount = Vector3.Cross(direction, transform.up).z;
 
-            // Rotate the projectile to face the direction of movement
-            float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
-            projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        // Decrease the homing strength to make the missile hit the nearest enemy earlier
+        rb.angularVelocity = -rotateAmount * rotateSpeed * homingStrength;
+        rb.velocity = transform.up * speed;
+    }
 
-            // Increment time
-            time += Time.deltaTime;
-
-            yield return null;
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (((1 << other.gameObject.layer) & LayerMask.GetMask("Enemy")) != 0)
+        {
+            // Put a particle effect here if needed
+            Destroy(gameObject);
         }
     }
 }

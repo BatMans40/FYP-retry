@@ -64,7 +64,11 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
         Vector3 spawnPosition = GetRandomSpawnPositionAroundPlayer();
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
+        // Use the prefab's original rotation instead of a random one
+        Quaternion spawnRotation = enemyPrefab.transform.rotation;
+
+        Instantiate(enemyPrefab, spawnPosition, spawnRotation);
     }
 
     Vector3 GetRandomSpawnPositionAroundPlayer()
