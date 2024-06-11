@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
             SetAnimatorMovement(direction);
         }
         else
-        {          
+        {
             animator.SetLayerWeight(1, 0);
         }
     }

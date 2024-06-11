@@ -333,6 +333,7 @@ GameObject:
   - component: {fileID: 4032550230545673939}
   - component: {fileID: 1530106471922502383}
   - component: {fileID: 3710233714273037293}
+  - component: {fileID: 5822934134114066013}
   m_Layer: 0
   m_Name: 01
   m_TagString: Player
@@ -506,6 +507,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e36eb21da1a6564d89cd2b7b6467823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5822934134114066013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3923484680857298665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f070d2e6dc88884ea73f335004a1c3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 1331233541120365023, guid: 7f908ef75119e5b458733450e6f8900b, type: 3}
+  minDamage: 80
+  maxDamage: 100
+  projectileForce: 3
+  cooldown: 2
+  homingRate: 100
+  shootingRange: 100
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &4114289073650348323
 GameObject:
   m_ObjectHideFlags: 0

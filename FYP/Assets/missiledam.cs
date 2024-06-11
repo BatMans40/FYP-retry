@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class missileProjectileDmg : MonoBehaviour
 {
     [SerializeField]
-    private float damage = 10f; // Default damage value, can be adjusted in the Inspector
-    public LayerMask enemyLayer; // LayerMask to detect enemies
+    private float damage = 10f;
+    public LayerMask enemyLayer;
+    public GameObject explosionEffect; // Reference to the explosion effect prefab
+    public float explosionDuration = 2f; // Duration of the explosion effect
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,17 +19,22 @@ public class missileProjectileDmg : MonoBehaviour
             {
                 // Call the DealDamage method and pass the damage value
                 enemyDamageReceiver.DealDamage(damage);
+                // Play the explosion effect
+                PlayExplosionEffect(collision.transform.position);
                 // Destroy the enemy object
                 Destroy(collision.gameObject);
             }
-            else
-            {
-                // Optionally, handle the case where the enemy does not have an EnemyReceiveDamage component
-                Debug.LogWarning("Hit object does not have an EnemyReceiveDamage component.", collision.gameObject);
-            }
-
-            // Destroy the projectile after dealing damage
+            // Destroy the missile
             Destroy(gameObject);
         }
+    }
+
+    private void PlayExplosionEffect(Vector3 position)
+    {
+        // Instantiate the explosion effect at the collision point
+        GameObject explosion = Instantiate(explosionEffect, position, Quaternion.identity);
+
+        // Destroy the explosion effect after the specified duration
+        Destroy(explosion, explosionDuration);
     }
 }
