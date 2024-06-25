@@ -26,20 +26,21 @@ public class RotateAround : MonoBehaviour
             // Set the position of the object to the follow position immediately
             transform.position = followPosition;
         }
-        else
-        {
-            // Log a warning message if the target is not assigned
-            Debug.LogWarning("Target for rotation is not assigned!", this);
-        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if the object collided with has the "Enemy" layer
+        // Check if the object collided with has the "enemy" layer
         if (collision.gameObject.layer == LayerMask.NameToLayer("enemy"))
         {
             // Destroy the enemy object
             Destroy(collision.gameObject);
         }
+    }
+
+    public void Activate(Transform newTarget)
+    {
+        target = newTarget; // Set the new target (player)
+        gameObject.SetActive(true); // Activate the rotating object
     }
 }

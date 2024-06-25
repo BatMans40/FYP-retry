@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: -655111384526021065}
   - component: {fileID: 1900162811265590850}
   - component: {fileID: -8663435841631781105}
-  - component: {fileID: -106050295746973124}
+  - component: {fileID: -5916945617895972240}
   m_Layer: 7
   m_Name: dragon
   m_TagString: Untagged
@@ -182,14 +182,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5457790763810854682}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.9999809, z: 0, w: 0.006187191}
   m_LocalPosition: {x: -0.169, y: -0.205, z: 0}
-  m_LocalScale: {x: 0.16540964, y: 0.15871195, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 281602754410939226}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -179.291, z: 0}
 --- !u!95 &2816370157408247811
 Animator:
   serializedVersion: 5
@@ -279,6 +279,7 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 7464178321295189852}
   healthBarSlider: {fileID: 26226065812992618}
+  coinPickup: {fileID: -2055279009560224349, guid: 1c689626d28427b47aa28761914d4443, type: 3}
   lootDrop: {fileID: 5213121525248916708, guid: 1c689626d28427b47aa28761914d4443, type: 3}
 --- !u!114 &4634379206987801082
 MonoBehaviour:
@@ -295,7 +296,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7634297039916640365, guid: 18e59c3aa05f8264a943fcbe4a665e3b, type: 3}
   minDamage: 10
   maxDamage: 20
-  projectileForce: 1
+  projectileForce: 5
   cooldown: 2
   homingRate: 5
 --- !u!61 &-655111384526021065
@@ -355,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa1c2b0b5fb5e64dae73fdeb6b36c02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 0.6
 --- !u!50 &-8663435841631781105
 Rigidbody2D:
   serializedVersion: 4
@@ -383,7 +384,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &-106050295746973124
+--- !u!114 &-5916945617895972240
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -392,7 +393,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5457790763810854682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e36eb21da1a6564d89cd2b7b6467823, type: 3}
+  m_Script: {fileID: 11500000, guid: bd8427140dc01434ba17f9605201c53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6453964150974606788

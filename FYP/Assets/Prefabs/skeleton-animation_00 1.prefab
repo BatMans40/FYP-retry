@@ -187,11 +187,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  maxHealth: 100
+  maxHealth: 50
   healthBar: {fileID: 8089230511311323535, guid: d5c7ae3726d083b428e4ab2658b78c61, type: 3}
   healthBarSlider: {fileID: 3342675188718391684, guid: d5c7ae3726d083b428e4ab2658b78c61, type: 3}
   coinPickup: {fileID: -2055279009560224349, guid: 1c689626d28427b47aa28761914d4443, type: 3}
-  lootDrop: {fileID: 5213121525248916708, guid: 1c689626d28427b47aa28761914d4443, type: 3}
+  lootDrop: {fileID: 0}
 --- !u!114 &8344925744005087275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa1c2b0b5fb5e64dae73fdeb6b36c02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 3
 --- !u!114 &582403217134856223
 MonoBehaviour:
   m_ObjectHideFlags: 0

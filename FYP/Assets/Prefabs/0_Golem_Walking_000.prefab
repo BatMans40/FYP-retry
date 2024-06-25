@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.31, y: 0.68, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalScale: {x: 0.21164064, y: 0.2116406, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  maxHealth: 100
+  maxHealth: 60
   healthBar: {fileID: 8089230511311323535, guid: d5c7ae3726d083b428e4ab2658b78c61, type: 3}
   healthBarSlider: {fileID: 3342675188718391684, guid: d5c7ae3726d083b428e4ab2658b78c61, type: 3}
   coinPickup: {fileID: -2055279009560224349, guid: 1c689626d28427b47aa28761914d4443, type: 3}
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa1c2b0b5fb5e64dae73fdeb6b36c02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 0.6
 --- !u!114 &3349447707703608988
 MonoBehaviour:
   m_ObjectHideFlags: 0

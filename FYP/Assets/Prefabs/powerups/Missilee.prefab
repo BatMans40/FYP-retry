@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6812164369425113354}
   - component: {fileID: 4406256408410827724}
   - component: {fileID: 4565796398241591602}
-  - component: {fileID: 3649968895890838994}
+  - component: {fileID: -8387581271971916627}
   m_Layer: 0
   m_Name: Missilee
   m_TagString: Untagged
@@ -170,7 +170,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3649968895890838994
+--- !u!114 &-8387581271971916627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,12 +179,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4301167722713633036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ea700619b93c2149b31b55d12b518a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 88b2d795461e26a418029d2c65c4d8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  explosionEffect: {fileID: 5876085235337635641, guid: 8813cc51a19e0be428f3145b9b5d1080, type: 3}
+  explosionDuration: 1
+  minDamage: 10
+  maxDamage: 20
+  projectileForce: 10
+  rotateSpeed: 200
+  homingStrength: 8
+  shootingRange: 10
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  explosionEffect: {fileID: 5876085235337635641, guid: 8813cc51a19e0be428f3145b9b5d1080, type: 3}
-  explosionDuration: 0.5

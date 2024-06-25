@@ -10,10 +10,19 @@ public class EnemySpawner : MonoBehaviour
     public float humanSpawnRate;
     public float batSpawnRate;
     public float dragonSpawnRate;
+    public float humanSpawnDuration = 60f; // Duration for human enemies to spawn
+    public float batSpawnDuration = 60f; // Duration for bat enemies to spawn
+    public float dragonSpawnDuration = 60f; // Duration for dragon enemies to spawn
+    public float humanSpawnRadius = 7f;
+    public float batSpawnRadius = 10f;
+    public float dragonSpawnRadius = 15f;
 
     private Transform playerTransform;
     private bool spawnBats = false;
     private bool spawnDragons = false;
+    private float humanSpawnStartTime;
+    private float batSpawnStartTime;
+    private float dragonSpawnStartTime;
 
     void Start()
     {
@@ -23,33 +32,60 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnAllEnemies()
     {
+        humanSpawnStartTime = Time.timeSinceLevelLoad;
+
         while (true)
         {
             if (playerTransform != null)
             {
-                SpawnEnemy(HumanEnemies);
-                yield return new WaitForSeconds(humanSpawnRate);
+                float elapsedTime = Time.timeSinceLevelLoad;
 
-                if (Time.timeSinceLevelLoad >= 30f && !spawnBats)
+                // Human Enemies
+                if (elapsedTime - humanSpawnStartTime < humanSpawnDuration)
                 {
-                    spawnBats = true;
+                    SpawnEnemy(HumanEnemies, humanSpawnRadius);
+                    yield return new WaitForSeconds(humanSpawnRate);
                 }
 
-                if (Time.timeSinceLevelLoad >= 60f && !spawnDragons)
+                // Bat Enemies
+                if (elapsedTime >= 60f)
                 {
-                    spawnDragons = true;
+                    if (!spawnBats)
+                    {
+                        spawnBats = true;
+                        batSpawnStartTime = elapsedTime;
+                    }
+
+                    if (elapsedTime - batSpawnStartTime < batSpawnDuration)
+                    {
+                        SpawnEnemy(BatEnemies, batSpawnRadius);
+                        yield return new WaitForSeconds(batSpawnRate);
+                    }
                 }
 
-                if (spawnBats)
+                // Dragon Enemies
+                if (elapsedTime >= 90f)
                 {
-                    SpawnEnemy(BatEnemies);
-                    yield return new WaitForSeconds(batSpawnRate);
+                    if (!spawnDragons)
+                    {
+                        spawnDragons = true;
+                        dragonSpawnStartTime = elapsedTime;
+                    }
+
+                    if (elapsedTime - dragonSpawnStartTime < dragonSpawnDuration)
+                    {
+                        SpawnEnemy(DragonEnemies, dragonSpawnRadius);
+                        yield return new WaitForSeconds(dragonSpawnRate);
+                    }
                 }
 
-                if (spawnDragons)
+                // Check if all enemy spawn durations have ended
+                if (elapsedTime - humanSpawnStartTime >= humanSpawnDuration &&
+                    (elapsedTime - batSpawnStartTime >= batSpawnDuration || !spawnBats) &&
+                    (elapsedTime - dragonSpawnStartTime >= dragonSpawnDuration || !spawnDragons))
                 {
-                    SpawnEnemy(DragonEnemies);
-                    yield return new WaitForSeconds(dragonSpawnRate);
+                    // Stop spawning enemies
+                    yield break;
                 }
             }
             else
@@ -60,10 +96,12 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void SpawnEnemy(List<GameObject> enemyPrefabs)
+    void SpawnEnemy(List<GameObject> enemyPrefabs, float spawnRadius)
     {
+        if (enemyPrefabs.Count == 0) return;
+
         GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
-        Vector3 spawnPosition = GetRandomSpawnPositionAroundPlayer();
+        Vector3 spawnPosition = GetRandomSpawnPositionAroundPlayer(spawnRadius);
 
         // Use the prefab's original rotation instead of a random one
         Quaternion spawnRotation = enemyPrefab.transform.rotation;
@@ -71,11 +109,9 @@ public class EnemySpawner : MonoBehaviour
         Instantiate(enemyPrefab, spawnPosition, spawnRotation);
     }
 
-    Vector3 GetRandomSpawnPositionAroundPlayer()
+    Vector3 GetRandomSpawnPositionAroundPlayer(float spawnRadius)
     {
-        // Define a closer spawn range around the player
-        float spawnRange = 7f; // Reduced spawn range for closer spawning
-        Vector3 randomDirection = Random.insideUnitCircle.normalized * spawnRange;
+        Vector3 randomDirection = Random.insideUnitCircle.normalized * spawnRadius;
         Vector3 spawnPosition = playerTransform.position + randomDirection;
 
         // Ensure the enemy spawns at ground level (assuming z=0 is ground level)
