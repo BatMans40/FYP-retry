@@ -11,6 +11,8 @@ public class EnemyReceiveDamage : MonoBehaviour
     public GameObject healthBar;
     public Slider healthBarSlider;
 
+    public CurrencyPickup coinPickup;
+
     public GameObject lootDrop; // Corrected variable name
 
     private void Start()
@@ -20,11 +22,25 @@ public class EnemyReceiveDamage : MonoBehaviour
 
     public void DealDamage(float damage)
     {
-        healthBar.SetActive(true);
         health -= damage;
-        CheckDeath();
-        healthBarSlider.value = CalculateHealthPercentage();
+        if (health <= 0)
+        {
+            Die();
+        }
     }
+
+    public void Die()
+    {
+        // Destroy the enemy object
+        Destroy(gameObject);
+
+        // Instantiate the CurrencyPickup object
+        CurrencyPickup pickup = Instantiate(coinPickup, transform.position, Quaternion.identity);
+        pickup.currentObject = CurrencyPickup.PickupObject.COIN;
+        
+    }
+
+
 
     public void HealCharacter(float heal)
     {

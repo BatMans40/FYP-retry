@@ -74,7 +74,7 @@ public class EnemySpawner : MonoBehaviour
     Vector3 GetRandomSpawnPositionAroundPlayer()
     {
         // Define a closer spawn range around the player
-        float spawnRange = 3f; // Reduced spawn range for closer spawning
+        float spawnRange = 7f; // Reduced spawn range for closer spawning
         Vector3 randomDirection = Random.insideUnitCircle.normalized * spawnRange;
         Vector3 spawnPosition = playerTransform.position + randomDirection;
 

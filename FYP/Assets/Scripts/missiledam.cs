@@ -19,13 +19,16 @@ public class missileProjectileDmg : MonoBehaviour
             {
                 // Call the DealDamage method and pass the damage value
                 enemyDamageReceiver.DealDamage(damage);
+
+                // Call the Die() method to trigger the loot drop
+                enemyDamageReceiver.Die();
+
                 // Play the explosion effect
                 PlayExplosionEffect(collision.transform.position);
-                // Destroy the enemy object
-                Destroy(collision.gameObject);
+
+                // Destroy the missile
+                Destroy(gameObject);
             }
-            // Destroy the missile
-            Destroy(gameObject);
         }
     }
 

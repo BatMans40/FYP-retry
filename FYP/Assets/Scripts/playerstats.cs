@@ -5,32 +5,27 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-    public float speed; // Add a variable to store speed
+    public float speed; // Variable to store speed
     public static PlayerStats playerStats;
     public GameObject player;
     public float health;
     public float maxHealth;
 
     // Add references to UI components
-    public Slider healthslider;
+    public Slider healthSlider;
     public Text healthText;
-    public Text gemsValue;
-    public Text coinsValue;
-
-    public int coins;
-    public int gems;
 
     private void Awake()
     {
         if (playerStats != null)
         {
-            Destroy(playerStats);
+            Destroy(playerStats.gameObject);
         }
         else
         {
             playerStats = this;
         }
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
@@ -45,22 +40,24 @@ public class PlayerStats : MonoBehaviour
         CheckDeath();
         SetHealthUI();
     }
+
     public void IncreaseSpeed(float speedBoost)
     {
         speed += speedBoost;
         // Implement any additional logic needed when speed is increased
     }
 
-    public void HealCharacter(float heal)
+    public void HealCharacter(float healAmount)
     {
-        health += heal;
+        health += healAmount;
         CheckOverheal();
         SetHealthUI();
+        
     }
 
     private void SetHealthUI()
     {
-        healthslider.value = CalculateHealthPercentage();
+        healthSlider.value = CalculateHealthPercentage();
         healthText.text = Mathf.Ceil(health).ToString() + " / " + Mathf.Ceil(maxHealth).ToString();
     }
 
@@ -78,20 +75,6 @@ public class PlayerStats : MonoBehaviour
         {
             health = 0;
             Destroy(player); // Destroy the player object
-        }
-    }
-
-    public void AddCurrency(CurrencyPickup currency)
-    {
-        if (currency.currentObject == CurrencyPickup.PickupObject.COIN)
-        {
-            coins += currency.pickupQuantity;
-            coinsValue.text = "Coins: " + coins.ToString(); // Update the coinsValue text
-        }
-        else if (currency.currentObject == CurrencyPickup.PickupObject.GEM)
-        {
-            gems += currency.pickupQuantity;
-            gemsValue.text = "Gems: " + gems.ToString(); // Update the gemsValue text
         }
     }
 

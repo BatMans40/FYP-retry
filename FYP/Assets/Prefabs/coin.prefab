@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3183881911177007063}
   - component: {fileID: 4609759719948149581}
   - component: {fileID: 8668373346456819336}
-  - component: {fileID: 4571544739242726216}
   - component: {fileID: -971376679017539185}
   - component: {fileID: -3730574215366731570}
   - component: {fileID: 2921178830805564608}
+  - component: {fileID: -2055279009560224349}
   m_Layer: 0
   m_Name: coin
   m_TagString: Untagged
@@ -110,20 +110,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4571544739242726216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5213121525248916708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f95a587820875534db9cafdc199118ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentObject: 0
-  pickupQuantity: 10
 --- !u!50 &-971376679017539185
 Rigidbody2D:
   serializedVersion: 4
@@ -209,3 +195,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+--- !u!114 &-2055279009560224349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5213121525248916708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95a587820875534db9cafdc199118ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentObject: 0
+  pickupQuantity: 1

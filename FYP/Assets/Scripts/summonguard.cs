@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RotateAround : MonoBehaviour
 {
-    public Transform target; // The target object to rotate around
+    public Transform target; // The target object to rotate around (assign the player prefab in the Inspector)
     public float rotateSpeed = 21f; // Speed of rotation
     public float rotationRadius = 2f; // Radius of the circular path around the player
 

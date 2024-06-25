@@ -128,6 +128,7 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 8089230511311323535, guid: d5c7ae3726d083b428e4ab2658b78c61, type: 3}
   healthBarSlider: {fileID: 3342675188718391684, guid: d5c7ae3726d083b428e4ab2658b78c61, type: 3}
+  coinPickup: {fileID: -2055279009560224349, guid: 1c689626d28427b47aa28761914d4443, type: 3}
   lootDrop: {fileID: 5213121525248916708, guid: 1c689626d28427b47aa28761914d4443, type: 3}
 --- !u!50 &5935622847849497355
 Rigidbody2D:
@@ -223,7 +224,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

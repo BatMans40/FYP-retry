@@ -351,7 +351,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7654211575463003446}
@@ -522,14 +522,14 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4301167722713633036, guid: 5cc9d93a89f8f334387140a8827316c6, type: 3}
   minDamage: 80
   maxDamage: 100
-  projectileForce: 3
+  projectileForce: 10
   cooldown: 2
   shootingRange: 100
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  rotateSpeed: 200
-  homingStrength: 0.5
+  rotateSpeed: 100
+  homingStrength: 10
 --- !u!1 &4114289073650348323
 GameObject:
   m_ObjectHideFlags: 0
